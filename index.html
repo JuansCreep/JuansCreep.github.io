@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            background-image: url('fondo.jpg');
+            background-size: 105%; /* Aumentamos el tamaño de la imagen de fondo un 5% */
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            width: 80%; /* Hemos cambiado el ancho a un porcentaje */
+            height: 80%; /* Hemos cambiado la altura a un porcentaje */
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 204, 204, 0.5); /* Cambiamos el color de fondo con transparencia */
+        }
+        .card h1 {
+            font-size: 3em;
+            color: red;
+            font-family: 'Great Vibes', cursive;
+        }
+        .card img {
+            width: 20%; /* Reducimos el tamaño de la imagen */
+            height: auto;
+            margin-bottom: 20px; /* Añadimos un margen inferior para separar la imagen de los botones */
+        }
+        .card button {
+            padding: 15px; /* Aumentamos el tamaño de los botones */
+            font-size: 1.3em; /* Aumentamos el tamaño del texto de los botones */
+            border: none;
+            border-radius: 5px;
+            background-color: #ffcccc;
+            color: #ff6666;
+            cursor: pointer;
+            margin-right: 10px; /* Añadimos un margen derecho para separar los botones */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .mensaje-recuerdo {
+            color: red;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.55em; /* Aumentamos el tamaño del texto del mensaje un 5% */
+            margin-bottom: 20px; /* Añadimos un margen inferior para separar el mensaje de la imagen */
+        }
+        .mensaje-original {
+            font-size: 3.1em; /* Mantenemos el tamaño original del mensaje original */
+            margin-bottom: 20px; /* Añadimos un margen inferior para separar el mensaje de la imagen */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="mensaje-original">Feliz San Valentín</h1>
+        <img src="rosa sin fondo.png" alt="Rosa de San Valentín">
+        <div class="button-container">
+            <button id="proseguir" style="display:block" onclick="proseguir()">➡️ Proseguir</button>
+        </div>
+    </div>
+    <script>
+        var imagenOriginal = 'rosa sin fondo.png';
+        var imagenOso = 'oso de peluche.png';
+        var imagenRecuerdo = 'imagen de recuerdo.jpg';
+        var botones = document.querySelector('.button-container');
+
+        function proseguir() {
+            if (document.querySelector('.card img').getAttribute('src') == imagenOriginal) {
+                document.querySelector('.card img').src = imagenOso;
+                botones.innerHTML = `
+                    <button id="retroceder" onclick="retroceder()">⬅️ Retroceder</button>
+                    <button id="proseguir" onclick="proseguir()">➡️ Proseguir</button>
+                `;
+            } else if (document.querySelector('.card img').getAttribute('src') == imagenOso) {
+                document.querySelector('.card img').src = imagenRecuerdo;
+                botones.innerHTML = `
+                    <button id="retroceder" onclick="retroceder()">⬅️ Retroceder</button>
+                `;
+                // Añadir el mensaje arriba de la imagen de recuerdo
+                document.querySelector('.card').insertAdjacentHTML('afterbegin', '<p class="mensaje-recuerdo">Con Amor, tu Tentación e Ingeniero Camilo</p>');
+            }
+        }
+
+        function retroceder() {
+            if (document.querySelector('.card img').getAttribute('src') == imagenOso) {
+                document.querySelector('.card img').src = imagenOriginal;
+                botones.innerHTML = `
+                    <button id="proseguir" onclick="proseguir()">➡️ Proseguir</button>
+                `;
+            } else if (document.querySelector('.card img').getAttribute('src') == imagenRecuerdo) {
+                document.querySelector('.card img').src = imagenOso;
+                botones.innerHTML = `
+                    <button id="retroceder" onclick="retroceder()">⬅️ Retroceder</button>
+                    <button id="proseguir" onclick="proseguir()">➡️ Proseguir</button>
+                `;
+                // Eliminar el mensaje arriba de la imagen de recuerdo
+                document.querySelector('.mensaje-recuerdo').remove();
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
